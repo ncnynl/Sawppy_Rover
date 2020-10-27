@@ -1,6 +1,6 @@
 # Sawppy the Rover
 
-Sawppy is a motorized model of Mars rovers Curiosity and Mars 2020. It faithfully reproduces
+Sawppy is a motorized model of Mars rovers Curiosity and Perseverance. It faithfully reproduces
 the [Rocker-Bogie suspension kinematics](https://en.wikipedia.org/wiki/Rocker-bogie) of real
 rovers and is intended to be a hardware platform for future software projects in autonomous
 operation. Go forth and boldly explore the back yard, Sawppy!
@@ -31,14 +31,31 @@ These two major design goals can be summarized as: **S**ervo **A**ctuated **W**h
 
 # Development Status
 
-**Sawppy is at version 1.0!** 
+**Sawppy version 1.0** 
 
 This milestone includes a motorized rolling chassis that is mechanically functional.
 The remaining areas (electrical, software, etc.) are still very immature, just barely enough
 to validate mechanical chassis function. Click this image for a YouTube video illustrating
 the chassis in action, climbing a backpack that is almost double the height of wheel diameter.
 
-[![Sawppy conquers a backpack](https://img.youtube.com/vi/acANiRFg-qA/0.jpg)](https://www.youtube.com/watch?v=acANiRFg-qA)
+[![Sawppy conquers a backpack](https://img.youtube.com/vi/SEBBMDWgtC4/0.jpg)](https://www.youtube.com/watch?v=SEBBMDWgtC4)
+
+**Sawppy version 1.1**
+
+Sawppy has received only minor mechanical changes for this milestone, including the rocker joint
+angle limiter visible in action in the backpack demo video above. Most of the attention has been
+on software, with contributions by the Sawppy community.
+
+A Sawppy builder can now choose from many Sawppy software options. Roughly in order of power and complexity, they are:
+
+* **Simplest**: Wired control [running on an Arduino](https://github.com/Roger-random/Sawppy_Rover/tree/master/arduino_sawppy) instead of Raspberry Pi. Created as a [backup control option](https://newscrewdriver.com/2019/05/20/sawppy-roving-with-wired-handheld-controller/) in noisy RF environments where WiFi is unreliable. It also happens to feature the bare-bones version of Sawppy geometry calculations. Wired control meant skipping all the overhead of wireless communication. Cutting out all HTML code also meant this is a good basis for other control mechanisms: send desired speed and direction into Arduino and let it handle Sawppy chassis geometry calculation.
+* **Original**: HTML-based wireless teleoperation software stack [modified from SGVHAK rover](/docs/SGVHAK%20Rover%20Software.md). This was written to be easy for others to understand and modify.
+* **R/C control**: [lightly modified from my SGVHAK rover software](https://github.com/mw46d/SGVHAK_Rover) by Marco Walther (mw46d) for a Raspberry Pi-based way to interface with traditional remote control receivers.
+
+Plus two options for turning Sawppy into a [ROS](http://ros.org) robotics platform.
+
+* **ROS Kinetic**: [heavily modified from my SGVHAK rover software](https://github.com/mw46d/Sawppy_ROS) by Marco Walther (mw46d) which translates ROS `/cmd_vel` commands into Sawppy movement. This is a good stepping stone beyond original Sawppy software.
+* **ROS Melodic**: [a ground-up rewrite of a ROS-centric stack](https://github.com/srmainwaring/curio) by Rhys Mainwaring (srmainwaring) is extensive and powerful. Going beyond responding to `/cmd_vel` commands, it also calculates `/odom` by interpolating LX-16A position encoder ~270 degree feedback into full 360 degrees. Plus visualizing rover state in RViz, and files to put a digital Sawppy in Gazebo robot simulation environment.
 
 # Modifications From Rover Builders
 
@@ -52,3 +69,9 @@ see the [`modifications` folder](/modifications) for more information.
 * [Project page on Hackaday.io](https://hackaday.io/project/158208-sawppy-the-rover)
 * [Build blog](https://newscrewdriver.com/category/projects/sawppy-the-rover/)
 * [Live Onshape CAD file "Sawppy the Rover"](https://cad.onshape.com/documents/43678ef564a43281c83e1aef/w/392bbf8745395bc24367a35c/e/9bd6bbb7aba50a97523d14f2)
+
+# Financial Support
+
+Sawppy is shared free of charge, but builders in the United States may choose to buy some parts via
+[Amazon affiliate links](docs/AmazonAssociate.md)
+which will send a small sales commission to Sawppy's creator.
